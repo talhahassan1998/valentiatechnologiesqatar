@@ -76,6 +76,30 @@ shows up in production, since the dev server and `vite preview` both handle it.
 `vercel.json` and `public/_redirects` (Netlify / Cloudflare Pages) are both
 committed; each is inert on the wrong host.
 
+**GitHub Pages** is the live target, published by
+`.github/workflows/deploy.yml` on every push to `main`:
+
+<https://talhahassan1998.github.io/valentiatechnologiesqatar/>
+
+Pages serves from a subdirectory rather than the domain root, which two things
+have to agree on:
+
+- `vite.config.ts` sets `base` from a `GITHUB_PAGES` env var, so asset URLs get
+  the `/valentiatechnologiesqatar/` prefix. It is an env var rather than a
+  hardcoded value because Vercel and Netlify serve from the root — a baked-in
+  prefix would break both.
+- `src/main.tsx` derives the router `basename` from `import.meta.env.BASE_URL`,
+  so it cannot drift from whatever `base` resolved to at build time.
+
+Pages applies no rewrite rule of its own, so the workflow copies `index.html`
+to `404.html`. A deep link like `/services` asks for a file that does not
+exist, and serving the SPA shell as the 404 page hands the request to the
+router — the Pages equivalent of the two configs above.
+
+Enabling it is a one-time repo setting: **Settings → Pages → Source → GitHub
+Actions**. Without it the `configure-pages` step fails even though the build
+itself succeeds.
+
 ## Assets
 
 `public/network-texture.png` and `public/v-lattice.png` were generated with
