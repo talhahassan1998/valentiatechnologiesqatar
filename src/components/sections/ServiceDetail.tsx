@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap, revealChildren } from '@/lib/motion'
 import { Section } from '@/components/ui/Primitives'
 import { capabilities, serviceDetail } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 type Capability = (typeof capabilities)[number]
 type Detail = (typeof serviceDetail)[string]
@@ -43,7 +44,7 @@ export function ServiceDetail({
           <div className="flex items-center gap-3">
             {/* Products carry an icon; the service capabilities do not. */}
             {'icon' in item && typeof item.icon === 'string' && (
-              <img src={item.icon} alt="" width="26" height="27" className="h-9 w-9" />
+              <img src={asset(item.icon)} alt="" width="26" height="27" className="h-9 w-9" />
             )}
             <span className="text-eyebrow font-mono text-v-blue-400">{item.index}</span>
             <span className="h-px w-12 bg-v-blue-400/25" aria-hidden="true" />

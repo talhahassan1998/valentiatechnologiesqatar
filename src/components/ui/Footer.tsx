@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { products, sectors } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 // Derived from the data rather than hand-copied, so the footer cannot drift
 // out of step with the solutions and sectors the site actually lists.
@@ -44,7 +45,7 @@ export function Footer() {
           <div>
             <Link to="/" aria-label="Valentia Technologies">
               <img
-                src="/valentia-logo.png"
+                src={asset("/valentia-logo.png")}
                 alt="Valentia Technologies"
                 className="logo-themed h-10 w-auto"
               />

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { gsap, useReducedMotion } from '@/lib/motion'
 import { AmbientWash, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { partners, partnersIntro } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 /**
  * Technology partners — a centre-focused carousel.
@@ -247,7 +248,7 @@ function PartnerCard({
           the plate inherits the card's corners without its own radius. */}
       <div className="flex h-40 items-center justify-center bg-on-brand px-5 py-5">
         <img
-          src={partner.logo}
+          src={asset(partner.logo)}
           alt={partner.name}
           width="324"
           height="144"

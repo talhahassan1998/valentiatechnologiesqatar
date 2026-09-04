@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap, revealChildren } from '@/lib/motion'
 import { AmbientWash, Button, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { products } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 /**
  * Homepage teaser for the product suite. Each card links through to its
@@ -43,7 +44,7 @@ export function Solutions() {
           >
             <div className="flex items-start justify-between gap-4">
               <img
-                src={p.icon}
+                src={asset(p.icon)}
                 alt=""
                 width="26"
                 height="27"

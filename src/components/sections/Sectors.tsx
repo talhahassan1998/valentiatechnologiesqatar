@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap, revealChildren } from '@/lib/motion'
 import { AmbientWash, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { products, sectors } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 const productTitle = (id: string) => products.find((p) => p.id === id)?.title ?? id
 
@@ -45,7 +46,7 @@ export function Sectors({ compact = false }: { compact?: boolean }) {
           >
             <div className="flex items-center gap-3">
               <img
-                src={s.icon}
+                src={asset(s.icon)}
                 alt=""
                 width="26"
                 height="27"

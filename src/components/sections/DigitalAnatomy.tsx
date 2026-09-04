@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap, parallax, ScrollTrigger, useReducedMotion } from '@/lib/motion'
 import { Eyebrow } from '@/components/ui/Primitives'
 import { anatomyLayers } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 /**
  * "The Digital Anatomy of Healthcare" — the concept section.
@@ -69,7 +70,7 @@ export function DigitalAnatomy() {
       <div
         data-texture
         className="pointer-events-none absolute inset-0 scale-110 bg-cover bg-center opacity-55"
-        style={{ backgroundImage: 'url(/network-texture.png)' }}
+        style={{ backgroundImage: `url(${asset('/network-texture.png')})` }}
         aria-hidden="true"
       />
 

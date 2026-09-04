@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { products, sectors } from '@/data/content'
 import { useTheme } from '@/lib/theme'
+import { asset } from '@/lib/asset'
 
 /** Sun / moon toggle. Inline so the nav stays one file. */
 function ThemeToggle({ className = '' }: { className?: string }) {
@@ -112,7 +113,7 @@ export function Nav() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
         <Link to="/" className="flex items-center gap-3" aria-label="Valentia Technologies">
           <img
-            src="/valentia-logo.png"
+            src={asset("/valentia-logo.png")}
             alt="Valentia Technologies"
             className="logo-themed h-8 w-auto md:h-9"
           />
@@ -189,7 +190,7 @@ export function Nav() {
                       >
                         {c.icon && (
                           <img
-                            src={c.icon}
+                            src={asset(c.icon)}
                             alt=""
                             width="26"
                             height="27"
@@ -264,7 +265,7 @@ export function Nav() {
                         className="flex items-center gap-2.5 text-sm text-v-ink-400"
                       >
                         {c.icon && (
-                          <img src={c.icon} alt="" width="26" height="27" className="h-4 w-4" />
+                          <img src={asset(c.icon)} alt="" width="26" height="27" className="h-4 w-4" />
                         )}
                         {c.label}
                       </Link>
