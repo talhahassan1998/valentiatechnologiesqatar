@@ -7,10 +7,13 @@ on:
   workflow_dispatch:
 
 # Pages needs these; the default GITHUB_TOKEN is read-only for contents.
+# `administration: write` is what lets configure-pages' `enablement: true`
+# create the Pages site — without it that call 403s instead of 404ing.
 permissions:
   contents: read
   pages: write
   id-token: write
+  administration: write
 
 # One deploy at a time. `cancel-in-progress: false` so a run that is already
 # publishing is allowed to finish rather than leaving the site half-swapped.
@@ -26,7 +29,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       # `npm ci` not `npm install`: it installs exactly what the lockfile
@@ -48,7 +51,14 @@ jobs:
       # Pages equivalent of vercel.json's rewrite and public/_redirects.
       - run: cp dist/index.html dist/404.html
 
+      # enablement: true lets the action create the Pages site and set its
+      # source to Actions if that has not been done in repo settings. Without
+      # it this step fails with "Get Pages site failed" on a repo where Pages
+      # was never turned on, or where the source is still "deploy from a
+      # branch" — which is the same error either way.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
