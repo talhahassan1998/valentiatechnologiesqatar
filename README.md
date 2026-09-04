@@ -97,8 +97,14 @@ exist, and serving the SPA shell as the 404 page hands the request to the
 router — the Pages equivalent of the two configs above.
 
 Enabling it is a one-time repo setting: **Settings → Pages → Source → GitHub
-Actions**. Without it the `configure-pages` step fails even though the build
-itself succeeds.
+Actions**. Without it — or with the source left on "Deploy from a branch" —
+`configure-pages` fails with *"Get Pages site failed"* even though lint,
+typecheck and build all succeed.
+
+That action can create the site itself via `enablement: true`, but the option
+needs `administration: write`, which is not a permission a workflow can grant
+itself; adding it to the `permissions:` block makes GitHub reject the whole
+workflow before any job starts. So the repo setting really is manual.
 
 ## Assets
 
