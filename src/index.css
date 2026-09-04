@@ -1,0 +1,144 @@
+@import './styles/tokens.css';
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto; /* Lenis owns scrolling */
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-v-ink-900);
+    color: var(--color-v-ink-100);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-v-blue-600);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-v-blue-400);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  canvas {
+    display: block;
+    touch-action: pan-y;
+  }
+}
+
+@layer utilities {
+  /* The logo's V-fold, reused as a clip path for masks and dividers. */
+  .clip-v-fold {
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hairline rules that stay in the blue family rather than going grey. */
+  .rule-brand {
+    border-color: color-mix(in oklab, var(--color-v-blue-400) 22%, transparent);
+  }
+
+  /* Literal white, for type sitting on a brand-coloured fill. `text-white`
+     resolves through --color-white, which the light theme remaps to ink so
+     headings stay readable — a filled button needs the real thing. */
+  .text-on-brand {
+    color: #fff;
+  }
+
+  /* Literal white ground, for the partner logo plate — those PNGs are opaque
+     on white and need it in both themes. */
+  .bg-on-brand {
+    background-color: #fff;
+  }
+
+  /* The brand logo's wordmark is white, so it disappears on a light ground.
+     Swapping the src in CSS keeps both Nav and Footer on one rule and avoids
+     a second <img> that would double the request. */
+  .logo-themed {
+    content: url('/valentia-logo.png');
+  }
+
+  [data-theme='light'] .logo-themed {
+    content: url('/valentia-logo-light.png');
+  }
+
+  /* Inside a force-dark subtree the ground is dark again, so the dark-ground
+     logo comes back regardless of page theme. */
+  [data-theme='light'] .force-dark .logo-themed {
+    content: url('/valentia-logo.png');
+  }
+
+  /* The scrolled nav bar. 85% alpha reads as frosted glass on the dark
+     ground, but on a light one the page shows straight through it — so
+     light mode gets a near-opaque bar instead. */
+  .nav-scrolled {
+    background-color: color-mix(in srgb, var(--color-v-ink-900) 85%, transparent);
+  }
+
+  [data-theme='light'] .nav-scrolled {
+    background-color: color-mix(in srgb, var(--color-v-ink-900) 97%, transparent);
+  }
+
+  /* The hero stays dark in both themes — see palette.ts. Re-declaring the
+     ink scale on the subtree means its existing utility classes resolve to
+     the dark values without touching any of its markup. */
+  [data-theme='light'] .force-dark {
+    --color-v-ink-950: #07080f;
+    --color-v-ink-900: #0b0d1a;
+    --color-v-ink-800: #12152a;
+    --color-v-ink-700: #1b1f3d;
+    --color-v-ink-600: #272c52;
+    --color-v-ink-500: #3a4070;
+    --color-v-ink-400: #5f6699;
+    --color-v-ink-300: #8f95bd;
+    --color-v-ink-200: #c2c6de;
+    --color-v-ink-100: #e2e4f0;
+    --color-v-ink-50: #eff0fe;
+    --color-white: #fff;
+    --color-v-blue-400: #6b73ef;
+    --color-v-blue-300: #949af3;
+    --color-v-crimson-400: #d95d7e;
+  }
+}
+
+/* Respect the user's motion preference everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

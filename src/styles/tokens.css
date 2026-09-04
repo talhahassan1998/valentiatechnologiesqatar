@@ -1,0 +1,144 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   VALENTIA TECHNOLOGIES — BRAND TOKENS
+   Colors sampled directly from the official logo
+   (Picture1.png, 880x274, Adam7-interlaced PNG).
+
+   Both hue families are hue-locked in the source mark:
+     blue    -> hue 236
+     crimson -> hue 343-345
+   The whole system derives from these two anchors, with
+   lightness + saturation doing the work.
+   ============================================================ */
+
+@theme {
+  /* --- Blue family (hue 236) — technology, trust, precision --- */
+  --color-v-blue-50: #eff0fe;
+  --color-v-blue-100: #dcdefc;
+  --color-v-blue-200: #bcc0f9;
+  --color-v-blue-300: #949af3;
+  --color-v-blue-400: #6b73ef;
+  --color-v-blue-500: #4e58eb; /* sampled: ribbon top face */
+  --color-v-blue-600: #3d47d5; /* sampled: ribbon mid — PRIMARY */
+  --color-v-blue-700: #2a33bd; /* sampled: ribbon side face */
+  --color-v-blue-800: #212a96;
+  --color-v-blue-900: #1a2170;
+  --color-v-blue-950: #10143f;
+
+  /* --- Crimson family (hue 343-345) — humanity, confidence, energy --- */
+  --color-v-crimson-50: #fdf2f5;
+  --color-v-crimson-100: #fce7ec;
+  --color-v-crimson-200: #f7c7d3;
+  --color-v-crimson-300: #ee97ae;
+  --color-v-crimson-400: #d95d7e;
+  --color-v-crimson-500: #ba3959; /* sampled: ribbon top face */
+  --color-v-crimson-600: #9d1a40; /* sampled: ribbon mid — ACCENT */
+  --color-v-crimson-700: #831434; /* sampled: ribbon side face */
+  --color-v-crimson-800: #6b1029;
+  --color-v-crimson-900: #500c1f;
+  --color-v-crimson-950: #2e0611;
+
+  /* --- Ink / neutrals: pulled toward hue 236 so darks stay in-family --- */
+  --color-v-ink-950: #07080f;
+  --color-v-ink-900: #0b0d1a; /* primary dark ground */
+  --color-v-ink-800: #12152a;
+  --color-v-ink-700: #1b1f3d;
+  --color-v-ink-600: #272c52;
+  --color-v-ink-500: #3a4070;
+  /* Lifted from #5f6699: this token carries 12-14px body copy in ~20 places,
+     where the old value sat at 3.3-3.7:1 on the dark grounds — under the 4.5:1
+     floor. #757cb0 clears it on ink-950/900/800 (4.5-5.0:1) and stays a step
+     below ink-300, so the secondary/primary hierarchy is unchanged. Hue 236
+     is preserved. */
+  --color-v-ink-400: #757cb0;
+  --color-v-ink-300: #8f95bd;
+  --color-v-ink-200: #c2c6de;
+  --color-v-ink-100: #e2e4f0;
+  --color-v-ink-50: #eff0fe; /* sampled: logo ground */
+
+  /* --- Type --- */
+  --font-display: 'Inter Tight', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Fluid display scale — hero dominant, sections ~60% of hero */
+  --text-display: clamp(2.75rem, 9vw, 8.5rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.04em;
+
+  --text-h1: clamp(2.25rem, 5.5vw, 4.75rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.75rem, 3.4vw, 3.125rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.025em;
+
+  --text-h3: clamp(1.25rem, 1.9vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-lead: clamp(1.0625rem, 1.5vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Non-token raw values, for canvas/JS consumers */
+:root {
+  --v-blue: #3d47d5;
+  --v-blue-light: #4e58eb;
+  --v-blue-deep: #2a33bd;
+  --v-crimson: #9d1a40;
+  --v-crimson-light: #ba3959;
+  --v-crimson-deep: #831434;
+  --v-ground: #eff0fe;
+  --v-ink: #0b0d1a;
+}
+
+/* ============================================================
+   LIGHT THEME
+   The ink scale is the site's surface system: 950-800 are
+   grounds, 500-200 are text. Inverting that one ramp flips
+   every component at once, because nothing hardcodes a hex.
+
+   The blue and crimson families are hue anchors from the logo
+   and do NOT invert — only the two that carry text on a light
+   ground are darkened for contrast.
+
+   --color-white is remapped too: `text-white` is the heading
+   colour in 34 places, and would otherwise vanish on a light
+   ground.
+   ============================================================ */
+
+[data-theme='light'] {
+  /* Grounds, lightest first — mirrors the dark ramp's role order. */
+  --color-v-ink-950: #ffffff; /* deepest ground -> page white */
+  --color-v-ink-900: #f7f8fd; /* primary ground */
+  --color-v-ink-800: #eceef8; /* raised panel / hover */
+  --color-v-ink-700: #dfe2f2;
+  --color-v-ink-600: #c9cde6;
+
+  /* Text, darkest last — mirrors the dark ramp. */
+  --color-v-ink-500: #9195b8;
+  --color-v-ink-400: #5a5f85; /* secondary body */
+  --color-v-ink-300: #3f4468; /* primary body */
+  --color-v-ink-200: #262a47;
+  --color-v-ink-100: #14172b; /* body default */
+  --color-v-ink-50: #0b0d1a;
+
+  /* Headings. Tailwind's `text-white` resolves through this. */
+  --color-white: #0b0d1a;
+
+  /* Hairlines and eyebrows need more weight on a light ground —
+     v-blue-400 at 10-12% alpha is invisible on white. */
+  --color-v-blue-400: #4e58eb;
+  --color-v-blue-300: #3d47d5;
+  --color-v-crimson-400: #9d1a40;
+}
