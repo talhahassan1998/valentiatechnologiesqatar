@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap, revealChildren } from '@/lib/motion'
-import { Button, Section, SectionHeading } from '@/components/ui/Primitives'
+import { AmbientWash, Button, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { products } from '@/data/content'
 
 /**
@@ -19,20 +19,27 @@ export function Solutions() {
   }, [])
 
   return (
-    <Section id="solutions" className="border-t border-v-blue-400/10 scroll-mt-24">
+    <Section id="solutions" className="relative overflow-hidden scroll-mt-24"
+      backdrop={
+        <>
+          <AmbientWash from="top-right" hue="blue" />
+          <SectionDivider />
+        </>
+      }
+    >
       <SectionHeading
         eyebrow="What we build"
         title="Six platforms, one care record"
         lead="From the general practice to the ambulance to the oncology ward — each platform is built for its setting, and all of them speak to each other."
       />
 
-      <div ref={root} className="mt-16 grid gap-px bg-v-blue-400/10 sm:grid-cols-2 lg:grid-cols-3">
+      <div ref={root} className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <Link
             key={p.id}
             to={`/solutions#${p.id}`}
             data-card
-            className="group relative block bg-v-ink-900 p-8 transition-colors duration-500 hover:bg-v-ink-800 md:p-10"
+            className="group relative block card-surface p-8 md:p-10"
           >
             <div className="flex items-start justify-between gap-4">
               <img
@@ -42,7 +49,7 @@ export function Solutions() {
                 height="27"
                 loading="lazy"
                 decoding="async"
-                className="h-8 w-8"
+                className="card-icon h-8 w-8"
               />
               <svg
                 className="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -71,11 +78,6 @@ export function Solutions() {
               ))}
             </ul>
 
-            {/* Bottom rule that draws in on hover. */}
-            <span
-              className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-v-blue-500 to-v-crimson-500 transition-all duration-500 group-hover:w-full"
-              aria-hidden="true"
-            />
           </Link>
         ))}
       </div>

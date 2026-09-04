@@ -171,16 +171,30 @@ export function Nav() {
               {l.children && (
                 <div className="invisible absolute left-1/2 top-full w-56 -translate-x-1/2 pt-5 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
                   {/* Opaque, not translucent — page headings behind the panel
-                      show through a tinted background and make it unreadable. */}
-                  <div className="border border-v-blue-400/12 bg-v-ink-900 py-2 shadow-2xl shadow-black/50">
+                      show through a tinted background and make it unreadable.
+                      The top hairline is the brand gradient, so the panel reads
+                      as part of the system rather than a generic dropdown. */}
+                  <div className="relative overflow-hidden rounded-[var(--radius-md)] border border-v-blue-400/12 bg-v-ink-900 py-2 shadow-[0_24px_50px_-12px_rgb(0_0_0/0.6)]">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-v-crimson-500 via-v-blue-500 to-transparent"
+                    />
                     {l.children.map((c) => (
                       <Link
                         key={c.to}
                         to={c.to}
-                        className="flex items-center gap-3 px-5 py-2.5 text-sm text-v-ink-300 transition-colors hover:bg-v-ink-800 hover:text-white"
+                        // Items slide a touch on hover, which gives the panel a
+                        // sense of direction toward the page being opened.
+                        className="group/item flex items-center gap-3 px-5 py-2.5 text-sm text-v-ink-300 transition-all duration-300 hover:bg-v-ink-800 hover:pl-6 hover:text-white"
                       >
                         {c.icon && (
-                          <img src={c.icon} alt="" width="26" height="27" className="h-5 w-5" />
+                          <img
+                            src={c.icon}
+                            alt=""
+                            width="26"
+                            height="27"
+                            className="h-5 w-5 transition-transform duration-300 group-hover/item:scale-110"
+                          />
                         )}
                         {c.label}
                       </Link>
@@ -193,7 +207,7 @@ export function Nav() {
           <ThemeToggle />
           <Link
             to="/contact"
-            className="bg-v-blue-600 px-5 py-2.5 text-sm font-medium text-on-brand transition-colors hover:bg-v-blue-500"
+            className="btn-sheen btn-press rounded-[var(--radius-md)] bg-v-blue-600 px-5 py-2.5 text-sm font-medium text-on-brand shadow-[0_6px_22px_-8px_var(--color-v-blue-600)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-v-blue-500 hover:shadow-[0_12px_30px_-10px_var(--color-v-blue-500)]"
           >
             Get in Touch
           </Link>
@@ -261,7 +275,7 @@ export function Nav() {
             ))}
             <Link
               to="/contact"
-              className="mt-2 bg-v-blue-600 px-5 py-3 text-center text-sm font-medium text-on-brand"
+              className="btn-press mt-2 rounded-[var(--radius-md)] bg-v-blue-600 px-5 py-3.5 text-center text-sm font-medium text-on-brand shadow-[0_6px_22px_-8px_var(--color-v-blue-600)]"
             >
               Get in Touch
             </Link>

@@ -54,12 +54,23 @@ export function ContactCta({
     <Section className="border-t border-v-blue-400/10">
       <div
         ref={root}
-        className="relative overflow-hidden border border-v-blue-400/15 bg-v-ink-800/40 px-8 py-16 md:px-16 md:py-20"
+        className="relative overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/15 bg-v-ink-800/40 px-8 py-16 md:px-16 md:py-20"
       >
         {/* Brand wash, kept low so the type stays dominant. */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,var(--color-v-crimson-900)/40%,transparent_65%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,color-mix(in_oklab,var(--color-v-crimson-900)_40%,transparent),transparent_65%)]"
           aria-hidden="true"
+        />
+        {/* A second wash from the opposite corner, so the panel is lit from
+            two sides and does not fall flat across the middle. */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,color-mix(in_oklab,var(--color-v-blue-800)_32%,transparent),transparent_58%)]"
+          aria-hidden="true"
+        />
+        {/* Brand edge along the top of the panel. */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-v-crimson-500 via-v-blue-500 to-transparent"
         />
         {/* Copy left, turning mark right — the panel runs full width while the
             copy caps at max-w-2xl, which left the right side empty. */}

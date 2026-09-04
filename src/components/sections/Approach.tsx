@@ -149,22 +149,17 @@ export function Approach() {
           drive, so it must not join the [data-step] timeline. */}
       <div
         ref={metricsBand}
-        className="mt-24 grid gap-px border border-v-blue-400/12 bg-v-blue-400/12 sm:grid-cols-2 lg:grid-cols-4"
+        className="mt-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
       >
         {metrics.map((m) => (
           <div
             key={m.label}
-            className="group relative bg-v-ink-900 p-8 transition-colors duration-500 hover:bg-v-ink-800"
+            className="group relative card-surface p-8"
           >
             <div className="text-h2 font-display text-white">
               <CountUp value={m.value} />
             </div>
             <p className="mt-2 text-sm leading-relaxed text-v-ink-400">{m.label}</p>
-            {/* Bottom rule that draws in on hover. */}
-            <span
-              className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-v-blue-500 to-v-crimson-500 transition-all duration-500 group-hover:w-full"
-              aria-hidden="true"
-            />
           </div>
         ))}
       </div>

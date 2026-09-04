@@ -59,8 +59,245 @@
     clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
   }
 
+  /* ------------------------------------------------------------------
+     CARD SURFACE
+     Eight sections repeated the same panel by hand: an ink-900 ground,
+     a hover shift to ink-800, and an absolutely-positioned gradient rule
+     that grew on hover. Defining it once means the whole site gains depth
+     from one edit, and the cards cannot drift apart again.
+
+     The lift is the only geometry that moves, and it is 3px: enough to
+     read as a raise against the neighbouring cells in a gap-px grid,
+     small enough that a row of six does not look like it is bouncing.
+     ------------------------------------------------------------------ */
+  .card-surface {
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--radius-md);
+    /* The sheen and the underline are pseudo-elements pinned to the box, so
+       the corners must clip them — without this the bottom rule overshoots
+       the rounded edge and draws past the card. */
+    overflow: hidden;
+    /* Own border, now that the cards are separated. They used to sit in a
+       gap-px grid where a tinted parent showed through the 1px gap as a
+       shared hairline; rounded corners break that trick into visible
+       notches, so each card carries its own edge instead. */
+    border: 1px solid color-mix(in oklab, var(--color-v-blue-400) 12%, transparent);
+    background-color: var(--color-v-ink-900);
+    transition:
+      background-color 0.5s var(--ease-brand),
+      border-color 0.5s var(--ease-brand),
+      transform 0.5s var(--ease-brand),
+      box-shadow 0.5s var(--ease-brand);
+  }
+
+  .card-surface:hover,
+  .card-surface:focus-visible {
+    border-color: color-mix(in oklab, var(--color-v-blue-400) 30%, transparent);
+  }
+
+  /* The sheen: a brand-tinted wash rising from the lower-left, plus a
+     brighter top edge. Sits at -1 so card content always paints over it.
+     Fading a pseudo-element in beats animating a background, which would
+     repaint the whole panel every frame. */
+  .card-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--color-v-blue-400) 14%, transparent) 0%,
+        transparent 1px
+      ),
+      radial-gradient(
+        130% 100% at 0% 100%,
+        color-mix(in oklab, var(--color-v-blue-600) 16%, transparent) 0%,
+        transparent 62%
+      );
+    transition: opacity 0.5s var(--ease-brand);
+  }
+
+  .card-surface:hover,
+  .card-surface:focus-visible {
+    background-color: var(--color-v-ink-800);
+  }
+
+  .card-surface:hover::before,
+  .card-surface:focus-visible::before {
+    opacity: 1;
+  }
+
+  /* The gradient hairline that draws in along the bottom edge. Was an
+     extra <span> in every card; as a pseudo-element it costs no markup. */
+  .card-surface::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background-image: linear-gradient(
+      to right,
+      var(--color-v-blue-500),
+      var(--color-v-crimson-500)
+    );
+    transition: width 0.55s var(--ease-brand);
+  }
+
+  .card-surface:hover::after,
+  .card-surface:focus-visible::after {
+    width: 100%;
+  }
+
+  /* Pointer-only lift. Touch devices get the colour and rule but no
+     transform: a raise that sticks after a tap reads as a stuck card. */
+  @media (hover: hover) and (pointer: fine) {
+    .card-surface:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 20%, transparent),
+        0 18px 40px -24px color-mix(in oklab, var(--color-v-blue-950) 90%, transparent);
+    }
+  }
+
+  [data-theme='light'] .card-surface:hover {
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 22%, transparent),
+      0 20px 44px -26px color-mix(in oklab, var(--color-v-blue-600) 34%, transparent);
+  }
+
+  /* Engagement sits on the ink-950 band, so its cards start a step deeper
+     than the ink-900 default and must not lighten to the shared value. */
+  .card-surface-deep {
+    background-color: var(--color-v-ink-950);
+  }
+
+  .card-surface-deep:hover,
+  .card-surface-deep:focus-visible {
+    background-color: var(--color-v-ink-800);
+  }
+
+  /* Icons and marks that drift up as their card is hovered. */
+  .card-surface .card-icon {
+    transition: transform 0.5s var(--ease-brand);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-surface:hover .card-icon {
+      transform: translateY(-2px) scale(1.06);
+    }
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* ------------------------------------------------------------------
+     BUTTON SHEEN
+     A light band sweeps across the filled button on hover. Transform-only
+     (the band is pre-positioned off-frame), so it composites on the GPU
+     rather than repainting the fill.
+     ------------------------------------------------------------------ */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .btn-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.22) 50%,
+      transparent 80%
+    );
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-sheen:hover::after {
+      transform: translateX(100%);
+      transition: transform 0.75s var(--ease-brand);
+    }
+  }
+
+  /* Pressed feedback. Applies on touch too — this is the one place a
+     transform on tap is wanted, since it resolves the moment the finger
+     lifts. */
+  .btn-press:active {
+    transform: translateY(1px);
+  }
+
+  /* ------------------------------------------------------------------
+     PARTNER CAROUSEL
+     The rail is positioned arithmetically, so card width and the centring
+     offset have to agree exactly. Declaring both from one variable keeps
+     them in step across breakpoints — a mismatch here shows up as the
+     focused card drifting off-centre rather than as a broken layout.
+
+     One card on phones (the neighbours would be unreadable slivers), two from
+     `md`, three from `lg`.
+
+     `--per` is how many cards are visible; the card sizes itself off that one
+     number, so a breakpoint only ever changes `--per`. The track offset is
+     computed in JS from the measured card width rather than in `calc`,
+     because a percentage translate resolves against the track (7 cards wide),
+     not the rail — which silently puts the focused card a full card off
+     centre.
+     ------------------------------------------------------------------ */
+  .partner-rail {
+    --per: 1;
+  }
+
+  @media (width >= 48rem) {
+    .partner-rail {
+      --per: 2;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .partner-rail {
+      --per: 3;
+    }
+  }
+
+  /* flex-basis, not width: the card must divide the rail exactly, and
+     shrinking is disabled so seven of them overflow into a scrollable track
+     rather than compressing to fit. */
+  .partner-card {
+    flex: 0 0 calc(100% / var(--per));
+  }
+
+  /* ------------------------------------------------------------------
+     TAP TARGET
+     Small inline links (footer columns, sector product chips) rendered
+     16-31px tall — under the 44px minimum. The padding is applied as a
+     transparent ::after overlay rather than real box padding, so the
+     visual density of the lists is unchanged while the hit area clears
+     the floor. Only below `lg`, where a pointer is likely coarse.
+     ------------------------------------------------------------------ */
+  @media (max-width: 1023px) {
+    .tap-target {
+      position: relative;
+    }
+
+    .tap-target::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      min-height: 44px;
+      height: 100%;
+      transform: translateY(-50%);
+    }
   }
 
   /* Hairline rules that stay in the blue family rather than going grey. */

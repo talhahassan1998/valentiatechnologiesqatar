@@ -86,6 +86,20 @@
   --text-eyebrow--line-height: 1;
   --text-eyebrow--letter-spacing: 0.18em;
 
+  /* --- Radius ---
+     Deliberately restrained. This is clinical infrastructure software, and
+     a pill-shaped enterprise UI reads as consumer-app soft — the corners
+     should take the hard edge off without giving up precision.
+
+     The scale is tied to element size, not chosen per component: small
+     controls get `sm`, panels and cards get `md`, large plates and media
+     get `lg`. Anything wider than a card would look slack at `lg`, so
+     there is deliberately no `xl`. `full` exists only for genuine pills
+     and dots (progress ticks, avatars). */
+  --radius-sm: 4px; /* chips, inputs, tight controls */
+  --radius-md: 8px; /* cards, buttons, dropdown panels */
+  --radius-lg: 14px; /* section plates, logo plates, media */
+
   /* Motion */
   --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 }

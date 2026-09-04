@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap, revealChildren } from '@/lib/motion'
-import { Section, SectionHeading } from '@/components/ui/Primitives'
+import { AmbientWash, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { products, sectors } from '@/data/content'
 
 const productTitle = (id: string) => products.find((p) => p.id === id)?.title ?? id
@@ -21,20 +21,27 @@ export function Sectors({ compact = false }: { compact?: boolean }) {
   }, [])
 
   return (
-    <Section id="sectors" className="border-t border-v-blue-400/10 scroll-mt-24">
+    <Section id="sectors" className="relative overflow-hidden scroll-mt-24"
+      backdrop={
+        <>
+          <AmbientWash from="bottom-left" hue="crimson" />
+          <SectionDivider />
+        </>
+      }
+    >
       <SectionHeading
         eyebrow="Where care happens"
         title="Five settings, one standard"
         lead="Primary, supported living, out of hours, community and emergency care. Each has its own pressures — and its own platform."
       />
 
-      <div ref={root} className="mt-16 grid gap-px bg-v-blue-400/10 md:grid-cols-2 lg:grid-cols-3">
+      <div ref={root} className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {sectors.map((s, i) => (
           <div
             key={s.id}
             id={compact ? undefined : s.id}
             data-sector
-            className="group relative bg-v-ink-900 p-8 transition-colors duration-500 hover:bg-v-ink-800 md:p-10 lg:scroll-mt-24"
+            className="group relative card-surface p-8 md:p-10 lg:scroll-mt-24"
           >
             <div className="flex items-center gap-3">
               <img
@@ -44,7 +51,7 @@ export function Sectors({ compact = false }: { compact?: boolean }) {
                 height="27"
                 loading="lazy"
                 decoding="async"
-                className="h-8 w-8"
+                className="card-icon h-8 w-8"
               />
               <span className="text-eyebrow font-mono text-v-blue-400">
                 {String(i + 1).padStart(2, '0')}
@@ -72,18 +79,13 @@ export function Sectors({ compact = false }: { compact?: boolean }) {
                 <Link
                   key={id}
                   to={`/solutions#${id}`}
-                  className="border border-v-blue-400/20 px-3 py-1.5 text-xs text-v-ink-300 transition-colors hover:border-v-blue-400 hover:text-white"
+                  className="tap-target rounded-[var(--radius-sm)] border border-v-blue-400/20 px-3 py-2 text-xs text-v-ink-300 transition-colors duration-300 hover:border-v-blue-400 hover:bg-v-blue-600/10 hover:text-white"
                 >
                   {productTitle(id)}
                 </Link>
               ))}
             </div>
 
-            {/* Bottom rule that draws in on hover. */}
-            <span
-              className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-v-blue-500 to-v-crimson-500 transition-all duration-500 group-hover:w-full"
-              aria-hidden="true"
-            />
           </div>
         ))}
       </div>

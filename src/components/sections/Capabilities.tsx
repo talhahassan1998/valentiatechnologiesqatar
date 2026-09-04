@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { revealChildren, gsap } from '@/lib/motion'
-import { Button, Section, SectionHeading } from '@/components/ui/Primitives'
+import { AmbientWash, Button, Section, SectionDivider, SectionHeading } from '@/components/ui/Primitives'
 import { capabilities } from '@/data/content'
 
 /**
@@ -19,20 +19,27 @@ export function Capabilities() {
   }, [])
 
   return (
-    <Section id="technology" className="border-t border-v-blue-400/10">
+    <Section id="technology" className="relative overflow-hidden"
+      backdrop={
+        <>
+          <AmbientWash from="top-left" hue="blue" />
+          <SectionDivider />
+        </>
+      }
+    >
       <SectionHeading
         eyebrow="What we engineer"
         title="Software built for clinical reality"
         lead="Six disciplines that make up a working healthcare technology estate — engineered to interoperate, not to stand alone."
       />
 
-      <div ref={root} className="mt-16 grid gap-px bg-v-blue-400/10 sm:grid-cols-2 lg:grid-cols-3">
+      <div ref={root} className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((c) => (
           <Link
             key={c.id}
             to={`/services#${c.id}`}
             data-card
-            className="group relative block bg-v-ink-900 p-8 transition-colors duration-500 hover:bg-v-ink-800 md:p-10"
+            className="group relative block card-surface p-8 md:p-10"
           >
             <div className="flex items-start justify-between gap-4">
               <span className="text-eyebrow font-mono text-v-blue-400">{c.index}</span>
@@ -65,11 +72,6 @@ export function Capabilities() {
               ))}
             </ul>
 
-            {/* Bottom rule that draws in on hover. */}
-            <span
-              className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-v-blue-500 to-v-crimson-500 transition-all duration-500 group-hover:w-full"
-              aria-hidden="true"
-            />
           </Link>
         ))}
       </div>

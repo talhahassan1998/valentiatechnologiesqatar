@@ -66,7 +66,7 @@ export function Footer() {
                     <li key={l.label}>
                       <Link
                         to={l.to}
-                        className="text-sm text-v-ink-400 transition-colors hover:text-white"
+                        className="tap-target inline-block text-sm text-v-ink-400 transition-colors duration-300 hover:text-white"
                       >
                         {l.label}
                       </Link>

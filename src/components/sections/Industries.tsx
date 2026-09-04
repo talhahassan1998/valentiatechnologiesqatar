@@ -113,7 +113,7 @@ export function Industries() {
         {/* Image panel. Sticky so it stays beside the list on tall viewports. */}
         <div
           ref={panel}
-          className="relative hidden aspect-[4/3] overflow-hidden border border-v-blue-400/12 bg-v-ink-950 lg:block lg:sticky lg:top-28"
+          className="relative hidden aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/12 bg-v-ink-950 lg:block lg:sticky lg:top-28"
           aria-hidden="true"
         >
           {industries.map((ind, i) => (

@@ -56,8 +56,11 @@ export function Contact() {
     }
   }
 
+  // A faint filled ground under each field, so the form reads as a set of
+  // inputs rather than floating rules, and the focused field lifts out of the
+  // page instead of only changing its underline colour.
   const field =
-    'w-full border-b border-v-ink-600 bg-transparent py-3 text-white placeholder:text-v-ink-500 transition-colors focus:border-v-blue-400 focus:outline-none'
+    'w-full rounded-[var(--radius-sm)] border-b border-v-ink-600 bg-v-ink-800/40 px-3 py-3 text-white placeholder:text-v-ink-500 transition-all duration-300 hover:bg-v-ink-800/70 focus:border-v-blue-400 focus:bg-v-ink-800/80 focus:shadow-[0_6px_20px_-12px_var(--color-v-blue-500)] focus:outline-none'
 
   return (
     <Section id="contact" className="border-t border-v-blue-400/10">
@@ -123,7 +126,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="bg-v-blue-600 px-7 py-3.5 text-sm font-medium text-on-brand transition-colors hover:bg-v-blue-500 disabled:opacity-60"
+              className="btn-sheen btn-press rounded-[var(--radius-md)] bg-v-blue-600 px-7 py-3.5 text-sm font-medium text-on-brand shadow-[0_8px_30px_-8px_var(--color-v-blue-600)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-v-blue-500 hover:shadow-[0_14px_38px_-10px_var(--color-v-blue-500)] disabled:translate-y-0 disabled:opacity-60 disabled:shadow-none"
             >
               {status === 'sending' ? 'Sending…' : 'Send Enquiry'}
             </button>

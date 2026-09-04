@@ -73,7 +73,10 @@ export function DigitalAnatomy() {
         aria-hidden="true"
       />
 
-      <div data-pin className="relative min-h-[100svh] px-6 py-24 md:px-12">
+      {/* py-24 md:py-32 to match Section — this one is hand-rolled rather than
+          using <Section> because it is pinned, and it was the only band on the
+          page opening at 96px while every other section opened at 128px. */}
+      <div data-pin className="relative min-h-[100svh] px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-7xl">
           <Eyebrow>The digital anatomy of healthcare</Eyebrow>
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap, revealChildren, useReducedMotion } from '@/lib/motion'
-import { Eyebrow, Section } from '@/components/ui/Primitives'
+import { AmbientWash, Eyebrow, Section } from '@/components/ui/Primitives'
 import { positioning } from '@/data/content'
 
 /**
@@ -55,14 +55,14 @@ export function Positioning() {
   }, [reduced])
 
   return (
-    <Section id="company" className="relative overflow-hidden border-t border-v-blue-400/10">
-      {/* Ambient wash so the statement does not sit on a flat ground. Fades to
-          transparent, so it cannot band, and resolves per theme. */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--color-v-blue-900)/18%,transparent_62%)]"
-        aria-hidden="true"
-      />
-
+    <Section
+      id="company"
+      className="relative overflow-hidden border-t border-v-blue-400/10"
+      // Through the backdrop slot, not as a child: children render inside the
+      // max-w-7xl content column, so a wash placed there is clipped to the
+      // text measure and its edge lands hard against the copy.
+      backdrop={<AmbientWash from="top-left" hue="blue" />}
+    >
       <div ref={root} className="relative">
         <div data-reveal>
           <Eyebrow>{positioning.eyebrow}</Eyebrow>
@@ -82,20 +82,15 @@ export function Positioning() {
 
         <div
           data-reveal
-          className="mt-16 grid gap-px border-t border-v-blue-400/10 bg-v-blue-400/10 sm:grid-cols-3"
+          className="mt-16 grid gap-4 sm:grid-cols-3"
         >
           {positioning.proof.map((p) => (
             <div
               key={p.value}
-              className="group relative bg-v-ink-900 p-8 transition-colors duration-500 hover:bg-v-ink-800"
+              className="group relative card-surface p-8"
             >
               <p className="text-h3 text-white">{p.value}</p>
               <p className="mt-3 text-sm leading-relaxed text-v-ink-400">{p.label}</p>
-              {/* Bottom rule that draws in on hover. */}
-              <span
-                className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-v-blue-500 to-v-crimson-500 transition-all duration-500 group-hover:w-full"
-                aria-hidden="true"
-              />
             </div>
           ))}
         </div>
