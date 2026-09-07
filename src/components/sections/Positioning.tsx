@@ -57,7 +57,7 @@ export function Positioning() {
   return (
     <Section
       id="company"
-      className="relative overflow-hidden border-t border-v-blue-400/10"
+      className="relative overflow-hidden border-t border-v-blue-400/12"
       // Through the backdrop slot, not as a child: children render inside the
       // max-w-7xl content column, so a wash placed there is clipped to the
       // text measure and its edge lands hard against the copy.

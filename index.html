@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/valentia-logo.png" />
+    <!-- The V mark, not the full lockup: the wordmark is illegible at 16px.
+         %BASE_URL% is substituted by Vite at build time -- a bare "/..." here
+         404s under the GitHub Pages subdirectory, and unlike JSX this file
+         cannot reach src/lib/asset.ts. -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0d1a" />
     <title>Valentia Technologies — Engineering Better Healthcare</title>

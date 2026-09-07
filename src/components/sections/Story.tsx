@@ -14,7 +14,7 @@ export function Story() {
   }, [])
 
   return (
-    <Section id="story" className="border-t border-v-blue-400/10 scroll-mt-24">
+    <Section id="story" className="border-t border-v-blue-400/12 scroll-mt-24">
       <SectionHeading
         eyebrow="Who we are"
         title="A software company that starts on the ward"

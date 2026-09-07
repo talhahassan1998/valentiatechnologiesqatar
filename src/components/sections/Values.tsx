@@ -14,7 +14,7 @@ export function Values() {
   }, [])
 
   return (
-    <Section id="values" className="border-t border-v-blue-400/10 scroll-mt-24">
+    <Section id="values" className="border-t border-v-blue-400/12 scroll-mt-24">
       <SectionHeading
         eyebrow="What we hold to"
         title="Four principles, applied consistently"

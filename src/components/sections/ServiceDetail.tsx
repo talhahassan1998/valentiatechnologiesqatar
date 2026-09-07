@@ -33,7 +33,7 @@ export function ServiceDetail({
   }, [])
 
   return (
-    <Section id={item.id} className="border-t border-v-blue-400/10 scroll-mt-24">
+    <Section id={item.id} className="border-t border-v-blue-400/12 scroll-mt-24">
       <div
         ref={root}
         className={`grid gap-12 lg:grid-cols-[0.9fr_1fr] lg:gap-20 ${

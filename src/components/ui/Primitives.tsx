@@ -299,7 +299,7 @@ export function PageHero({
   }, [reduced])
 
   return (
-    <section ref={root} className="relative overflow-hidden border-b border-v-blue-400/10 px-6 pb-20 pt-36 md:px-12 md:pb-28 md:pt-44">
+    <section ref={root} className="relative overflow-hidden border-b border-v-blue-400/12 px-6 pb-20 pt-36 md:px-12 md:pb-28 md:pt-44">
       {/* Ambient wash so the header does not read as a flat band. */}
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,color-mix(in_oklab,var(--color-v-blue-900)_35%,transparent),transparent_60%)]"

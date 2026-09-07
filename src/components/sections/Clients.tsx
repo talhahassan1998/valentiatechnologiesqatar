@@ -35,7 +35,7 @@ export function Clients() {
             reading as a tinted band across the page. */}
         <div
           data-reveal
-          className="relative overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/15 bg-v-ink-800/40"
+          className="relative overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/12 bg-v-ink-800/40"
         >
           {/* Same two-corner lighting as the CTA panel: crimson low-right,
               blue high-left, so the plate is lit from both brand hues and
@@ -85,7 +85,7 @@ export function Clients() {
               {clientProof.proof.map((p) => (
                 <li
                   key={p}
-                  className="group flex items-start gap-3 border-b border-v-blue-400/10 py-3 text-sm leading-relaxed text-v-ink-300 transition-colors duration-300 hover:text-white"
+                  className="group flex items-start gap-3 border-b border-v-blue-400/12 py-3 text-sm leading-relaxed text-v-ink-300 transition-colors duration-300 hover:text-white"
                 >
                   {/* The V-fold, marking each line. Decorative — the text
                       beside it carries the meaning. */}

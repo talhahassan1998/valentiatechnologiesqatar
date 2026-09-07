@@ -62,7 +62,7 @@ export function DigitalAnatomy() {
       // headroom, which on a section this tall pushes it ~200px past each edge.
       // Unclipped it bleeds the dark texture down over the next section's
       // heading — visible as a grey band once this section became force-dark.
-      className="force-dark relative overflow-hidden border-t border-v-blue-400/10 bg-v-ink-950"
+      className="force-dark relative overflow-hidden border-t border-v-blue-400/12 bg-v-ink-950"
       aria-label="The digital anatomy of healthcare"
     >
       {/* Ambient network texture (Higgsfield, brand-palette locked). Low opacity

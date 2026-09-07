@@ -102,7 +102,7 @@ export function Approach() {
   }, [reduced])
 
   return (
-    <Section id="approach" className="border-t border-v-blue-400/10">
+    <Section id="approach" className="border-t border-v-blue-400/12">
       <SectionHeading
         eyebrow="How we work"
         title="Engineering discipline, applied to care"

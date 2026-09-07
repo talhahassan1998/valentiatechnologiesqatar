@@ -175,7 +175,7 @@ export function Nav() {
                       show through a tinted background and make it unreadable.
                       The top hairline is the brand gradient, so the panel reads
                       as part of the system rather than a generic dropdown. */}
-                  <div className="relative overflow-hidden rounded-[var(--radius-md)] border border-v-blue-400/12 bg-v-ink-900 py-2 shadow-[0_24px_50px_-12px_rgb(0_0_0/0.6)]">
+                  <div className="relative overflow-hidden rounded-[var(--radius-md)] border border-v-blue-400/12 bg-v-ink-900 py-2 shadow-[var(--shadow-lg)]">
                     <span
                       aria-hidden="true"
                       className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-v-crimson-500 via-v-blue-500 to-transparent"
@@ -257,7 +257,7 @@ export function Nav() {
                   {l.label}
                 </NavLink>
                 {l.children && (
-                  <div className="flex flex-col gap-3 border-l border-v-blue-400/15 pl-4">
+                  <div className="flex flex-col gap-3 border-l border-v-blue-400/12 pl-4">
                     {l.children.map((c) => (
                       <Link
                         key={c.to}

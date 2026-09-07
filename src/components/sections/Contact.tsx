@@ -63,7 +63,7 @@ export function Contact() {
     'w-full rounded-[var(--radius-sm)] border-b border-v-ink-600 bg-v-ink-800/40 px-3 py-3 text-white placeholder:text-v-ink-500 transition-all duration-300 hover:bg-v-ink-800/70 focus:border-v-blue-400 focus:bg-v-ink-800/80 focus:shadow-[0_6px_20px_-12px_var(--color-v-blue-500)] focus:outline-none'
 
   return (
-    <Section id="contact" className="border-t border-v-blue-400/10">
+    <Section id="contact" className="border-t border-v-blue-400/12">
       <div ref={root} className="grid gap-16 lg:grid-cols-[0.85fr_1fr]">
         <div>
           <Eyebrow>Get in touch</Eyebrow>

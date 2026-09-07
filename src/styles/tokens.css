@@ -100,6 +100,27 @@
   --radius-md: 8px; /* cards, buttons, dropdown panels */
   --radius-lg: 14px; /* section plates, logo plates, media */
 
+  /* Elevation
+     Cards used to sit on the same value as the page ground (ink-900 on
+     ink-900 — a measured 1.00:1 contrast), held up by nothing but their
+     hairline border. These give the system the depth dimension it was
+     missing, and replace nine inline one-off shadow strings.
+
+     Tinted with ink-950 rather than black so shadows stay in the brand's
+     hue-236 family: a neutral black shadow reads grey against the blue
+     ground and dirties the palette. Alpha ramps with the blur to keep one
+     implied light source across all three steps. */
+  --shadow-sm:
+    0 1px 2px -1px color-mix(in oklab, var(--color-v-ink-950) 28%, transparent),
+    0 2px 6px -2px color-mix(in oklab, var(--color-v-ink-950) 20%, transparent);
+  --shadow-md:
+    0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 20%, transparent),
+    0 4px 12px -4px color-mix(in oklab, var(--color-v-ink-950) 34%, transparent),
+    0 18px 40px -24px color-mix(in oklab, var(--color-v-ink-950) 60%, transparent);
+  --shadow-lg:
+    0 12px 32px -8px color-mix(in oklab, var(--color-v-ink-950) 42%, transparent),
+    0 32px 64px -32px color-mix(in oklab, var(--color-v-ink-950) 55%, transparent);
+
   /* Motion */
   --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -155,4 +176,20 @@
   --color-v-blue-400: #4e58eb;
   --color-v-blue-300: #3d47d5;
   --color-v-crimson-400: #9d1a40;
+
+  /* Elevation must be re-declared, not inherited: the dark scale tints
+     with ink-950, which inverts to #ffffff here — a white shadow, i.e.
+     none at all. These tint with blue-600 instead, so the shade stays in
+     the brand hue, and run at much lower alpha because a shadow that
+     reads correctly on a dark ground is heavy-handed on white. */
+  --shadow-sm:
+    0 1px 2px -1px color-mix(in oklab, var(--color-v-blue-600) 10%, transparent),
+    0 2px 6px -2px color-mix(in oklab, var(--color-v-blue-600) 8%, transparent);
+  --shadow-md:
+    0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 22%, transparent),
+    0 4px 12px -4px color-mix(in oklab, var(--color-v-blue-600) 14%, transparent),
+    0 20px 44px -26px color-mix(in oklab, var(--color-v-blue-600) 34%, transparent);
+  --shadow-lg:
+    0 12px 32px -8px color-mix(in oklab, var(--color-v-blue-600) 16%, transparent),
+    0 32px 64px -32px color-mix(in oklab, var(--color-v-blue-600) 26%, transparent);
 }

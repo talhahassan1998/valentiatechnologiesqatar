@@ -77,7 +77,7 @@ export function Industries() {
   }
 
   return (
-    <Section id="industries" className="border-t border-v-blue-400/10">
+    <Section id="industries" className="border-t border-v-blue-400/12">
       <SectionHeading
         eyebrow="Where we work"
         title="Across the care continuum"

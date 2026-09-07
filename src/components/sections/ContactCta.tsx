@@ -51,10 +51,10 @@ export function ContactCta({
   }, [])
 
   return (
-    <Section className="border-t border-v-blue-400/10">
+    <Section className="border-t border-v-blue-400/12">
       <div
         ref={root}
-        className="relative overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/15 bg-v-ink-800/40 px-8 py-16 md:px-16 md:py-20"
+        className="relative overflow-hidden rounded-[var(--radius-lg)] border border-v-blue-400/12 bg-v-ink-800/40 px-8 py-16 md:px-16 md:py-20"
       >
         {/* Brand wash, kept low so the type stays dominant. */}
         <div

@@ -14,7 +14,7 @@ export function Engagement() {
   }, [])
 
   return (
-    <Section id="engagement" className="border-t border-v-blue-400/10 bg-v-ink-950 scroll-mt-24">
+    <Section id="engagement" className="border-t border-v-blue-400/12 bg-v-ink-950 scroll-mt-24">
       <SectionHeading
         eyebrow="How we engage"
         title="Three ways we work with you"

@@ -83,7 +83,13 @@
        shared hairline; rounded corners break that trick into visible
        notches, so each card carries its own edge instead. */
     border: 1px solid color-mix(in oklab, var(--color-v-blue-400) 12%, transparent);
-    background-color: var(--color-v-ink-900);
+    /* Raised off the page ground, not level with it. This used to be
+       ink-900 — the same token as the body — so a card had a measured
+       1.00:1 contrast with the page behind it and read as a flat region
+       bounded by a hairline. ink-800 is the ramp's existing "raised panel"
+       step and inverts correctly in the light theme. */
+    background-color: var(--color-v-ink-800);
+    box-shadow: var(--shadow-sm);
     transition:
       background-color 0.5s var(--ease-brand),
       border-color 0.5s var(--ease-brand),
@@ -120,9 +126,11 @@
     transition: opacity 0.5s var(--ease-brand);
   }
 
+  /* Hover lightens one further step. Was ink-800, which is now the
+     resting value — without this a hovered card would not change ground. */
   .card-surface:hover,
   .card-surface:focus-visible {
-    background-color: var(--color-v-ink-800);
+    background-color: var(--color-v-ink-700);
   }
 
   .card-surface:hover::before,
@@ -157,16 +165,8 @@
   @media (hover: hover) and (pointer: fine) {
     .card-surface:hover {
       transform: translateY(-3px);
-      box-shadow:
-        0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 20%, transparent),
-        0 18px 40px -24px color-mix(in oklab, var(--color-v-blue-950) 90%, transparent);
+      box-shadow: var(--shadow-md);
     }
-  }
-
-  [data-theme='light'] .card-surface:hover {
-    box-shadow:
-      0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 22%, transparent),
-      0 20px 44px -26px color-mix(in oklab, var(--color-v-blue-600) 34%, transparent);
   }
 
   /* Engagement sits on the ink-950 band, so its cards start a step deeper
@@ -179,6 +179,7 @@
   .card-surface-deep:focus-visible {
     background-color: var(--color-v-ink-800);
   }
+
 
   /* Icons and marks that drift up as their card is hovered. */
   .card-surface .card-icon {
@@ -365,6 +366,21 @@
     --color-v-blue-400: #6b73ef;
     --color-v-blue-300: #949af3;
     --color-v-crimson-400: #d95d7e;
+
+    /* The shadow scale has to come back with the ink scale. The light
+       theme re-tints it for a white ground; on this subtree the ground is
+       dark again, so an un-restored shadow would be far too faint to read
+       under a raised card. Same values as the dark default. */
+    --shadow-sm:
+      0 1px 2px -1px color-mix(in oklab, var(--color-v-ink-950) 28%, transparent),
+      0 2px 6px -2px color-mix(in oklab, var(--color-v-ink-950) 20%, transparent);
+    --shadow-md:
+      0 1px 0 0 color-mix(in oklab, var(--color-v-blue-400) 20%, transparent),
+      0 4px 12px -4px color-mix(in oklab, var(--color-v-ink-950) 34%, transparent),
+      0 18px 40px -24px color-mix(in oklab, var(--color-v-ink-950) 60%, transparent);
+    --shadow-lg:
+      0 12px 32px -8px color-mix(in oklab, var(--color-v-ink-950) 42%, transparent),
+      0 32px 64px -32px color-mix(in oklab, var(--color-v-ink-950) 55%, transparent);
   }
 }
 

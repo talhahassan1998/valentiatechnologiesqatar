@@ -134,7 +134,11 @@ function Rig({
     const i = easeOutBack(raw)   // form settles with one small rebound
     const iExpo = easeOutExpo(raw)
 
-    const targetX = compact ? 0 : THREE.MathUtils.lerp(1.75, 0.85, Math.min(1, p * 1.2))
+    // Held at a fixed X. This used to drift 1.75 -> 0.85 across scroll, which
+    // slid the mark toward the headline as the section left the viewport; the
+    // push-in and rotation below still carry the scroll, so the composition
+    // reads as depth rather than the form wandering across the frame.
+    const targetX = compact ? 0 : 1.75
     group.current.position.x += (targetX - group.current.position.x) * k
     group.current.position.y += ((compact ? 0.6 : 0) - group.current.position.y) * k
 

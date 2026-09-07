@@ -18,7 +18,7 @@ export function ContactDetails() {
   }, [])
 
   return (
-    <Section className="border-t border-v-blue-400/10 bg-v-ink-950">
+    <Section className="border-t border-v-blue-400/12 bg-v-ink-950">
       <div ref={root} className="grid gap-12 md:grid-cols-3">
         <div data-col>
           <h2 className="text-eyebrow font-mono uppercase text-v-blue-300">Where we are</h2>
