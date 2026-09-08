@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap, revealChildren, useReducedMotion } from '@/lib/motion'
 import { Section, SectionHeading } from '@/components/ui/Primitives'
 import { industries } from '@/data/content'
+import { asset } from '@/lib/asset'
 
 /**
  * "Where we work" — the settings list with a cross-fading image panel.
@@ -120,7 +121,7 @@ export function Industries() {
             <img
               key={ind.image}
               data-ind-img={i}
-              src={ind.image}
+              src={asset(ind.image)}
               alt=""
               // Every image is needed within ~20s of the section appearing,
               // and the six together are ~140 KB. Lazy-loading them means the
